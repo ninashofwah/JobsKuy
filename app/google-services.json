@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "984684976601",
+    "project_id": "jobskuy-bf644",
+    "storage_bucket": "jobskuy-bf644.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984684976601:android:7bf69929886a471a4961c8",
+        "android_client_info": {
+          "package_name": "com.proweb.jobskuy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBPwyYkYHVVH1xo77fBqvD9BKXKQfIKHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

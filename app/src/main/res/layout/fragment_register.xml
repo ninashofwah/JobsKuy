@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_light_gray">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvRegisterTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Daftar Akun Baru"
+            android:textColor="@color/text_dark"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="32dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardRegisterForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/tvRegisterTitle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <EditText
+                    android:id="@+id/etFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="Nama Lengkap"
+                    android:inputType="textPersonName"
+                    android:background="@android:color/transparent"
+                    android:paddingHorizontal="12dp"/>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E5E7EB" android:layout_marginVertical="6dp"/>
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="Alamat Email"
+                    android:inputType="textEmailAddress"
+                    android:background="@android:color/transparent"
+                    android:paddingHorizontal="12dp"/>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E5E7EB" android:layout_marginVertical="6dp"/>
+
+                <EditText
+                    android:id="@+id/etConfirmEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="Konfirmasi Alamat Email"
+                    android:inputType="textEmailAddress"
+                    android:background="@android:color/transparent"
+                    android:paddingHorizontal="12dp"/>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E5E7EB" android:layout_marginVertical="6dp"/>
+
+                <EditText
+                    android:id="@+id/etPhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="Nomor Telepon / WhatsApp"
+                    android:inputType="phone"
+                    android:background="@android:color/transparent"
+                    android:paddingHorizontal="12dp"/>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E5E7EB" android:layout_marginVertical="6dp"/>
+
+                <EditText
+                    android:id="@+id/etAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="Alamat Lengkap (Lokasi GPS Aktif)"
+                    android:inputType="textPostalAddress"
+                    android:background="@android:color/transparent"
+                    android:paddingHorizontal="12dp"/>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E5E7EB" android:layout_marginVertical="6dp"/>
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="Kata Sandi (Password)"
+                    android:inputType="textPassword"
+                    android:background="@android:color/transparent"
+                    android:paddingHorizontal="12dp"/>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E5E7EB" android:layout_marginVertical="6dp"/>
+
+                <EditText
+                    android:id="@+id/etConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="Konfirmasi Kata Sandi"
+                    android:inputType="textPassword"
+                    android:background="@android:color/transparent"
+                    android:paddingHorizontal="12dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnSubmitRegister"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Daftar &amp; Simpan Data"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/primary_blue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            app:cornerRadius="12dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/cardRegisterForm"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
