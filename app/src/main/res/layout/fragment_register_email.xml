@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_light_gray"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/tvStep1Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Langkah 1: Verifikasi Email"
+        android:textColor="@color/text_dark"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="64dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardEmailForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toBottomOf="@id/tvStep1Title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <EditText
+                android:id="@+id/etRegisterEmail"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="Masukkan Alamat Email"
+                android:inputType="textEmailAddress"
+                android:paddingHorizontal="16dp"
+                android:background="@android:color/transparent"
+                android:drawableStart="@android:drawable/ic_dialog_email"
+                android:drawablePadding="12dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnSendOtp"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Kirim Kode OTP"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/primary_blue"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        app:cornerRadius="12dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/cardEmailForm"/>
+
+    <!-- Kontainer Input OTP (Awalnya disembunyikan, muncul setelah tombol kirim diklik) -->
+    <LinearLayout
+        android:id="@+id/layoutOtpVerification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/btnSendOtp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Masukkan 6-Digit Kode OTP yang dikirim:"
+            android:textColor="@color/text_dark"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/etOtpCode"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:hint="X X X X X X"
+            android:gravity="center"
+            android:inputType="number"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.2"
+            android:background="@drawable/bg_rounded_search"/>
+
+        <Button
+            android:id="@+id/btnVerifyOtp"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Verifikasi Kode &amp; Lanjut"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/green_success"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            app:cornerRadius="12dp"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

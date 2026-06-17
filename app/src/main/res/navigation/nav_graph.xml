@@ -10,28 +10,72 @@
         android:name="com.proweb.jobskuy.ui.auth.RoleSelectionFragment"
         android:label="Pilih Peran"
         tools:layout="@layout/fragment_role_selection">
-        <action android:id="@+id/action_role_to_login" app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_role_to_login"
+            app:destination="@id/loginFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.proweb.jobskuy.ui.auth.LoginFragment"
-        android:label="Login"
+        android:label="Masuk Akun"
         tools:layout="@layout/fragment_login">
-        <argument android:name="role" app:argType="string" />
-        <action android:id="@+id/action_login_to_register" app:destination="@id/registerFragment" />
-        <action android:id="@+id/action_login_to_homeSeeker" app:destination="@id/homeSeekerFragment" app:popUpTo="@id/nav_graph" app:popUpToInclusive="true"/>
-        <action android:id="@+id/action_login_to_homeRecruiter" app:destination="@id/homeRecruiterFragment" app:popUpTo="@id/nav_graph" app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_login_to_registerEmail"
+            app:destination="@id/registerEmailFragment" />
+        <action
+            android:id="@+id/action_login_to_homeSeeker"
+            app:destination="@id/homeSeekerFragment" />
+        <action
+            android:id="@+id/action_login_to_homeRecruiter"
+            app:destination="@id/homeRecruiterFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerEmailFragment"
+        android:name="com.proweb.jobskuy.ui.auth.RegisterEmailFragment"
+        android:label="Verifikasi OTP"
+        tools:layout="@layout/fragment_register_email">
+        <action
+            android:id="@+id/action_registerEmail_to_registerProfile"
+            app:destination="@id/registerFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.proweb.jobskuy.ui.auth.RegisterFragment"
-        android:label="Daftar"
+        android:label="Isi Profil Data Diri"
         tools:layout="@layout/fragment_register">
-        <argument android:name="role" app:argType="string" />
+
+        <action
+            android:id="@+id/action_register_to_homeSeeker"
+            app:destination="@id/homeSeekerFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_register_to_homeRecruiter"
+            app:destination="@id/homeRecruiterFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
-    <fragment android:id="@+id/homeSeekerFragment" android:name="com.proweb.jobskuy.ui.home.HomeSeekerFragment" />
-    <fragment android:id="@+id/homeRecruiterFragment" android:name="com.proweb.jobskuy.ui.home.HomeRecruiterFragment" />
+    <fragment
+        android:id="@+id/homeSeekerFragment"
+        android:name="com.proweb.jobskuy.ui.home.HomeSeekerFragment"
+        android:label="Home Seeker"
+        tools:layout="@layout/fragment_home_seeker" />
+
+    <fragment
+        android:id="@+id/homeRecruiterFragment"
+        android:name="com.proweb.jobskuy.ui.home.HomeRecruiterFragment"
+        android:label="Home Recruiter"
+        tools:layout="@layout/fragment_home_recruiter" />
+
+    <fragment
+        android:id="@+id/applicantDetailFragment"
+        android:name="com.proweb.jobskuy.ui.home.ApplicantDetailFragment"
+        android:label="Detail Pelamar"
+        tools:layout="@layout/fragment_applicant_detail" />
+
 </navigation>

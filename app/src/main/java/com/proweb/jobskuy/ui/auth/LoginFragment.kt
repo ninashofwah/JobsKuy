@@ -34,7 +34,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             auth.signInWithEmailAndPassword(email, password).addOnSuccessListener { res ->
                 val uid = res.user?.uid ?: ""
 
-                // MENYIMPAN DATA KE SHAREDPREFERENCES (DATA LOKAL)
                 val sessionManager = SessionManager(requireContext())
                 sessionManager.createLoginSession(uid, selectedRole)
 
@@ -50,7 +49,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         binding.tvToRegister.setOnClickListener {
             val bundle = Bundle().apply { putString("role", selectedRole) }
-            findNavController().navigate(R.id.action_login_to_register, bundle)
+            findNavController().navigate(R.id.action_login_to_registerEmail, bundle)
         }
     }
 }
