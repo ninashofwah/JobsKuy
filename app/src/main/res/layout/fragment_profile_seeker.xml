@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F7FE">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="💼 Portofolio Profil Publik"
+            android:textColor="#2D3748"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data publik ini akan dapat ditinjau oleh Penyedia Kerja saat Anda melamar."
+            android:textColor="#718096"
+            android:textSize="13sp"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tautan Dokumen CV (URL)" android:textStyle="bold" android:textColor="#4A5568"/>
+        <EditText
+            android:id="@+id/etProfileDocsLink"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:drawable/editbox_background"
+            android:hint="https://drive.google.com/cv-anda"
+            android:inputType="textUri"
+            android:paddingHorizontal="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tautan Video Perkenalan (URL)" android:textStyle="bold" android:textColor="#4A5568"/>
+        <EditText
+            android:id="@+id/etProfileVideoLink"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:drawable/editbox_background"
+            android:hint="https://youtube.com/video-singkat"
+            android:inputType="textUri"
+            android:paddingHorizontal="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ringkasan Pengalaman Kerja" android:textStyle="bold" android:textColor="#4A5568"/>
+        <EditText
+            android:id="@+id/etProfileExperience"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@android:drawable/editbox_background"
+            android:hint="Ceritakan singkat riwayat pengalaman kerja..."
+            android:inputType="textMultiLine"
+            android:gravity="top|start"
+            android:padding="12dp"
+            android:layout_marginBottom="32dp"/>
+
+        <Button
+            android:id="@+id/btnSaveSeekerProfile"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Simpan Profil Publik"
+            android:textColor="@color/white"
+            android:backgroundTint="#5B93D3"
+            android:textStyle="bold"
+            app:cornerRadius="12dp"/>
+    </LinearLayout>
+</ScrollView>

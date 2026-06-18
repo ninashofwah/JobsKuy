@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">JobsKuy</string>
+    <string name="no_jobs_published">Belum ada lowongan yang dipublikasikan</string>
+    <string name="my_jobs_title">Daftar Lowongan Saya</string>
+    <string name="my_jobs_subtitle">Arsip data pekerjaan aktif yang Anda publikasikan</string>
 </resources>

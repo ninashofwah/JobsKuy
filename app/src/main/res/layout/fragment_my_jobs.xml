@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Daftar Lowongan Saya"
+            android:text="@string/my_jobs_title"
             android:textColor="@color/text_dark"
             android:textSize="22sp"
             android:textStyle="bold"/>
@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Arsip data pekerjaan aktif yang Anda publikasikan"
+            android:text="@string/my_jobs_subtitle"
             android:textColor="@color/text_muted"
             android:textSize="13sp"
             android:layout_marginTop="4dp"/>
@@ -40,6 +40,19 @@
         android:layout_height="0dp"
         android:padding="12dp"
         android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/headerMyJobs"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvNoData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_jobs_published"
+        android:textColor="@color/text_muted"
+        android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/headerMyJobs"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

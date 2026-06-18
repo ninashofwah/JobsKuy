@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeSeekerFragment"
+        android:icon="@drawable/ic_home"
+        android:title="Beranda" />
+
+    <item
+        android:id="@+id/myApplicationsFragment"
+        android:icon="@drawable/ic_work"
+        android:title="Lamaran Saya" />
+
+    <item
+        android:id="@+id/profileSeekerFragment"
+        android:icon="@drawable/ic_people"
+        android:title="Profil Public" />
+
+</menu>

@@ -1,61 +1,65 @@
 package com.proweb.jobskuy.ui.home
 
+import com.proweb.jobskuy.data.Job
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.proweb.jobskuy.R
-import com.proweb.jobskuy.data.Job
-import com.proweb.jobskuy.databinding.FragmentHomeSeekerBinding
+import com.proweb.jobskuy.databinding.FragmentMyJobsBinding
 
-class HomeSeekerFragment : Fragment(R.layout.fragment_home_seeker) {
+class MyJobsFragment : Fragment(R.layout.fragment_my_jobs) {
 
-    private var _binding: FragmentHomeSeekerBinding? = null
+    private var _binding: FragmentMyJobsBinding? = null
     private val binding get() = _binding!!
 
     private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
     private val jobList = ArrayList<Job>()
-    private lateinit var availableJobsAdapter: AvailableJobsAdapter
+    private lateinit var jobAdapter: ComplexJobsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentHomeSeekerBinding.bind(view)
+        _binding = FragmentMyJobsBinding.bind(view)
 
-        // Aksi klik foto profil kanan atas menuju pengaturan Akun Privat
-        binding.ivProfileSeeker.setOnClickListener {
-            findNavController().navigate(R.id.action_homeSeeker_to_profileAccount)
-        }
+        binding.rvMyJobs.layoutManager = LinearLayoutManager(requireContext())
+        jobAdapter = ComplexJobsAdapter(jobList)
+        binding.rvMyJobs.adapter = jobAdapter
 
-        // Inisialisasi RecyclerView secara linear vertikal
-        binding.rvAvailableJobs.layoutManager = LinearLayoutManager(requireContext())
-        availableJobsAdapter = AvailableJobsAdapter(jobList) { clickedJob ->
-            val bundle = Bundle().apply { putString("JOB_ID", clickedJob.jobId) }
-            findNavController().navigate(R.id.action_homeSeeker_to_jobDetail, bundle)
-        }
-        binding.rvAvailableJobs.adapter = availableJobsAdapter
-
-        loadAvailableJobs()
+        fetchMyJobsFromFirestore()
     }
 
-    private fun loadAvailableJobs() {
-        db.collection("jobs").addSnapshotListener { snapshots, error ->
-            if (error != null) return@addSnapshotListener
+    private fun fetchMyJobsFromFirestore() {
+        val currentRecruiterUid = auth.currentUser?.uid ?: return
 
-            jobList.clear()
-            if (snapshots != null) {
-                for (doc in snapshots) {
-                    val job = doc.toObject(Job::class.java)
-                    jobList.add(job)
+        db.collection("jobs")
+            .whereEqualTo("recruiterUid", currentRecruiterUid)
+            .addSnapshotListener { snapshots, error ->
+                if (error != null) return@addSnapshotListener
+
+                jobList.clear()
+                if (snapshots != null) {
+                    for (doc in snapshots) {
+                        val job = doc.toObject(Job::class.java)
+                        jobList.add(job)
+                    }
                 }
+
+                if (jobList.isEmpty()) {
+                    binding.tvNoData.visibility = View.VISIBLE
+                    binding.rvMyJobs.visibility = View.GONE
+                } else {
+                    binding.tvNoData.visibility = View.GONE
+                    binding.rvMyJobs.visibility = View.VISIBLE
+                }
+                jobAdapter.notifyDataSetChanged()
             }
-            availableJobsAdapter.notifyDataSetChanged()
-        }
     }
 
     override fun onDestroyView() {
@@ -63,11 +67,8 @@ class HomeSeekerFragment : Fragment(R.layout.fragment_home_seeker) {
         _binding = null
     }
 
-    // ADAPTER INTERNAL UNTUK DAFTAR LOWONGAN SEEKER
-    private class AvailableJobsAdapter(
-        private val list: List<Job>,
-        private val onClick: (Job) -> Unit
-    ) : RecyclerView.Adapter<AvailableJobsAdapter.ViewHolder>() {
+    private class ComplexJobsAdapter(private val list: List<Job>) :
+        RecyclerView.Adapter<ComplexJobsAdapter.ViewHolder>() {
 
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val company: TextView = view.findViewById(R.id.tvItemCompany)
@@ -89,8 +90,6 @@ class HomeSeekerFragment : Fragment(R.layout.fragment_home_seeker) {
             holder.desc.text = data.jobDescription
             holder.badgeApplicants.text = "Pelamar: ${data.currentApplicants}/${data.maxApplicants}"
             holder.badgeSalary.text = "Gaji: ${data.salary}"
-
-            holder.itemView.setOnClickListener { onClick(data) }
         }
 
         override fun getItemCount(): Int = list.size

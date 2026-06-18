@@ -23,7 +23,7 @@ class JobAdapter(
 
     override fun onBindViewHolder(holder: JobViewHolder, position: Int) {
         val job = jobs[position]
-        holder.binding.tvTitle.text = job.title
+        holder.binding.tvTitle.text = job.jobTitle
         holder.binding.tvSalary.text = "Gaji: ${job.salary}"
 
         // Kalkulasi Jarak Geospasial Secara Real-Time
