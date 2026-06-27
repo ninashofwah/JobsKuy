@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="8dp"
     android:layout_marginHorizontal="4dp"
-    app:cardCornerRadius="14dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="12dp"
     app:cardElevation="3dp">
 
     <LinearLayout
@@ -14,77 +15,40 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-
-            <TextView
-                android:id="@+id/tvItemCompany"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Warung Makmur Sejahtera"
-                android:textColor="#2D3748"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvItemLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvItemCompany"
-                android:text="Jakarta Selatan"
-                android:textColor="#718096"
-                android:textSize="13sp" />
-        </RelativeLayout>
-
         <TextView
             android:id="@+id/tvItemJobTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Supervisor Restoran"
-            android:textColor="#2B6CB0"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp"/>
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Deskripsi"
-            android:textStyle="bold"
-            android:textSize="12sp"
-            android:textColor="#4A5568"/>
+            android:text="Nama Pekerjaan"
+            android:textColor="#2D3748"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvItemCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Nama Instansi Perusahaan"
+            android:textColor="#718096"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tvItemJobDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Memimpin tim restoran..."
-            android:textColor="#4A5568"
-            android:textSize="14sp"
-            android:maxLines="2"
+            android:layout_marginTop="8dp"
             android:ellipsize="end"
-            android:layout_marginBottom="12dp"/>
+            android:maxLines="2"
+            android:text="Deskripsi ringkas mengenai lowongan..."
+            android:textColor="#4A5568"
+            android:textSize="13sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvItemApplicantsBadge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/toast_frame"
-                android:backgroundTint="#FEEBC8"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp"
-                android:text="Pelamar: 12/150"
-                android:textColor="#C05621"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:layout_marginRight="8dp"/>
 
             <TextView
                 android:id="@+id/tvItemSalaryBadge"
@@ -92,12 +56,25 @@
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/toast_frame"
                 android:backgroundTint="#EBF8FF"
-                android:paddingHorizontal="8dp"
+                android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
-                android:text="Gaji: Rp 4.5Jt - 5.5Jt"
+                android:text="Gaji: Rp -"
                 android:textColor="#2B6CB0"
                 android:textSize="12sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvItemApplicantsBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:background="@android:drawable/toast_frame"
+                android:backgroundTint="#F7FAFC"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="Pelamar: 0"
+                android:textColor="#4A5568"
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -67,6 +67,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-storage")
+    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
 
     // Navigation Component untuk Fragment Auth & Home
     implementation("androidx.navigation:navigation-fragment-ktx:2.8.5")

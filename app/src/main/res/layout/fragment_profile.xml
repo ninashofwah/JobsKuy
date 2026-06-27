@@ -5,85 +5,109 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F4F7FE"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:gravity="center_horizontal">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profil Penyedia Kerja"
+        android:text="Profil Saya (Recruiter)"
         android:textColor="#2D3748"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_marginBottom="24dp"/>
+        android:layout_marginBottom="20dp"/>
+
+    <ImageView
+        android:id="@+id/ivProfilePicRecruiter"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@android:drawable/sym_def_app_icon"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="16dp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="12dp"
-        android:layout_marginBottom="32dp">
+        android:layout_marginBottom="24dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:gravity="start">
 
             <TextView
+                android:id="@+id/tvProfileName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nama Penanggung Jawab"
-                android:textColor="#718096"
-                android:textSize="12sp"/>
-            <TextView
-                android:id="@+id/tvRecruiterName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Memuat nama..."
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:text="-"
                 android:textColor="#2D3748"
-                android:layout_marginBottom="16dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nama Perusahaan / UMKM"
-                android:textColor="#718096"
-                android:textSize="12sp"/>
-            <TextView
-                android:id="@+id/tvCompanyName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Memuat instansi..."
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="#2D3748"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="8dp"/>
 
             <TextView
+                android:id="@+id/tvProfileEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email Akun"
+                android:text="-"
                 android:textColor="#718096"
-                android:textSize="12sp"/>
-            <TextView
-                android:id="@+id/tvRecruiterEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="recruiter@email.com"
                 android:textSize="14sp"
-                android:textColor="#4A5568"/>
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/tvProfilePhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Telepon: -"
+                android:textColor="#718096"
+                android:textSize="14sp"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/tvProfileAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alamat: -"
+                android:textColor="#718096"
+                android:textSize="14sp"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:id="@+id/tvProfileRoleBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/toast_frame"
+                android:backgroundTint="#EBF8FF"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="Peran: -"
+                android:textColor="#2B6CB0"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnEditProfileRecruiter"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="✏️ Edit Data Profil"
+        android:textColor="@color/white"
+        android:backgroundTint="#4A77B4"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp"
+        app:cornerRadius="12dp"/>
 
     <Button
         android:id="@+id/btnLogoutRecruiter"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="Keluar Akun"
+        android:text="Keluar dari Akun"
         android:textColor="@color/white"
         android:backgroundTint="#E53E3E"
         android:textStyle="bold"
         app:cornerRadius="12dp"/>
-
 </LinearLayout>

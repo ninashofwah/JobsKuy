@@ -5,45 +5,108 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F4F7FE"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:gravity="center_horizontal">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="🔒 Akun Profil Anda (Privat)"
+        android:text="Pengaturan Profil Akun Seeker"
         android:textColor="#2D3748"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_marginBottom="24dp"/>
+        android:layout_marginBottom="20dp"/>
+
+    <ImageView
+        android:id="@+id/ivProfilePicSeeker"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@android:drawable/sym_def_app_icon"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="16dp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="12dp"
-        android:layout_marginBottom="32dp">
+        android:layout_marginBottom="24dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:gravity="start">
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Email Terdaftar" android:textColor="#718096" android:textSize="12sp"/>
-            <TextView android:id="@+id/tvAccountEmail" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="user@gmail.com" android:textSize="16sp" android:textStyle="bold" android:textColor="#2D3748" android:layout_marginBottom="16dp"/>
+            <TextView
+                android:id="@+id/tvSeekerProfileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textColor="#2D3748"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ID Otentikasi (UID)" android:textColor="#718096" android:textSize="12sp"/>
-            <TextView android:id="@+id/tvAccountUid" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Loading..." android:textSize="13sp" android:textColor="#4A5568"/>
+            <TextView
+                android:id="@+id/tvSeekerProfileEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textColor="#718096"
+                android:textSize="14sp"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/tvSeekerProfilePhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Telepon: -"
+                android:textColor="#718096"
+                android:textSize="14sp"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/tvSeekerProfileAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alamat: -"
+                android:textColor="#718096"
+                android:textSize="14sp"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:id="@+id/tvSeekerProfileRole"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/toast_frame"
+                android:backgroundTint="#F7FAFC"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="Kategori Akun: -"
+                android:textColor="#4A5568"
+                android:textSize="12sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnEditProfileSeeker"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="✏️ Edit Data Profil"
+        android:textColor="@color/white"
+        android:backgroundTint="#4A77B4"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp"
+        app:cornerRadius="12dp"/>
 
     <Button
         android:id="@+id/btnLogoutSeeker"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="Keluar dari Akun"
+        android:text="Keluar / Logout Akun"
         android:textColor="@color/white"
         android:backgroundTint="#E53E3E"
         android:textStyle="bold"
         app:cornerRadius="12dp"/>
-
 </LinearLayout>

@@ -1,17 +1,19 @@
 package com.proweb.jobskuy.ui.home
 
-import com.proweb.jobskuy.data.Job
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import com.proweb.jobskuy.R
+import com.proweb.jobskuy.data.Job
 import com.proweb.jobskuy.databinding.FragmentMyJobsBinding
 
 class MyJobsFragment : Fragment(R.layout.fragment_my_jobs) {
@@ -21,61 +23,62 @@ class MyJobsFragment : Fragment(R.layout.fragment_my_jobs) {
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
-    private val jobList = ArrayList<Job>()
-    private lateinit var jobAdapter: ComplexJobsAdapter
+    private val myJobList = ArrayList<Job>()
+    private lateinit var myAdapter: MyJobsAdapter
+
+    // Wadah pendaftaran pemutus sirkuit listener realtime
+    private var snapshotListenerRegistration: ListenerRegistration? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMyJobsBinding.bind(view)
 
         binding.rvMyJobs.layoutManager = LinearLayoutManager(requireContext())
-        jobAdapter = ComplexJobsAdapter(jobList)
-        binding.rvMyJobs.adapter = jobAdapter
+        myAdapter = MyJobsAdapter(myJobList) { clickedJob ->
+            val bundle = Bundle().apply { putString("JOB_ID", clickedJob.jobId) }
+            findNavController().navigate(R.id.action_myJobs_to_myJobDetail, bundle)
+        }
+        binding.rvMyJobs.adapter = myAdapter
 
-        fetchMyJobsFromFirestore()
+        loadMyPostedJobs()
     }
 
-    private fun fetchMyJobsFromFirestore() {
-        val currentRecruiterUid = auth.currentUser?.uid ?: return
+    private fun loadMyPostedJobs() {
+        val currentUid = auth.currentUser?.uid ?: return
 
-        db.collection("jobs")
-            .whereEqualTo("recruiterUid", currentRecruiterUid)
-            .addSnapshotListener { snapshots, error ->
-                if (error != null) return@addSnapshotListener
+        // Menyimpan status listener ke dalam variabel registrasi
+        snapshotListenerRegistration = db.collection("jobs")
+            .whereEqualTo("recruiterUid", currentUid)
+            .addSnapshotListener { snapshots, _ ->
+                // Mencegah crash crash jika UI fragment terlanjur dihancurkan ditengah jalan
+                if (_binding == null) return@addSnapshotListener
 
-                jobList.clear()
+                myJobList.clear()
                 if (snapshots != null) {
                     for (doc in snapshots) {
-                        val job = doc.toObject(Job::class.java)
-                        jobList.add(job)
+                        myJobList.add(doc.toObject(Job::class.java))
                     }
                 }
-
-                if (jobList.isEmpty()) {
-                    binding.tvNoData.visibility = View.VISIBLE
-                    binding.rvMyJobs.visibility = View.GONE
-                } else {
-                    binding.tvNoData.visibility = View.GONE
-                    binding.rvMyJobs.visibility = View.VISIBLE
-                }
-                jobAdapter.notifyDataSetChanged()
+                myAdapter.notifyDataSetChanged()
             }
     }
 
     override fun onDestroyView() {
+        // MUTLAK: Putus sambungan pemantauan Firestore agar memori HP bersih dan anti keluar sendiri
+        snapshotListenerRegistration?.remove()
         super.onDestroyView()
         _binding = null
     }
 
-    private class ComplexJobsAdapter(private val list: List<Job>) :
-        RecyclerView.Adapter<ComplexJobsAdapter.ViewHolder>() {
+    private class MyJobsAdapter(
+        private val list: List<Job>,
+        private val onClick: (Job) -> Unit
+    ) : RecyclerView.Adapter<MyJobsAdapter.ViewHolder>() {
 
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val company: TextView = view.findViewById(R.id.tvItemCompany)
             val title: TextView = view.findViewById(R.id.tvItemJobTitle)
-            val desc: TextView = view.findViewById(R.id.tvItemJobDescription)
-            val badgeApplicants: TextView = view.findViewById(R.id.tvItemApplicantsBadge)
-            val badgeSalary: TextView = view.findViewById(R.id.tvItemSalaryBadge)
+            val company: TextView = view.findViewById(R.id.tvItemCompany)
+            val salary: TextView = view.findViewById(R.id.tvItemSalaryBadge)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -84,14 +87,13 @@ class MyJobsFragment : Fragment(R.layout.fragment_my_jobs) {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val data = list[position]
-            holder.company.text = data.companyName
-            holder.title.text = data.jobTitle
-            holder.desc.text = data.jobDescription
-            holder.badgeApplicants.text = "Pelamar: ${data.currentApplicants}/${data.maxApplicants}"
-            holder.badgeSalary.text = "Gaji: ${data.salary}"
+            val job = list[position]
+            holder.title.text = job.jobTitle
+            holder.company.text = job.companyName
+            holder.salary.text = "Gaji: ${job.salary}"
+            holder.itemView.setOnClickListener { onClick(job) }
         }
 
-        override fun getItemCount(): Int = list.size
+        override fun getItemCount() = list.size
     }
 }

@@ -79,13 +79,47 @@
         android:id="@+id/myJobsFragment"
         android:name="com.proweb.jobskuy.ui.home.MyJobsFragment"
         android:label="Lowongan Saya"
-        tools:layout="@layout/fragment_my_jobs" />
+        tools:layout="@layout/fragment_my_jobs">
+        <action
+            android:id="@+id/action_myJobs_to_myJobDetail"
+            app:destination="@id/myJobDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/myJobDetailFragment"
+        android:name="com.proweb.jobskuy.ui.home.MyJobDetailFragment"
+        android:label="Kelola Lowongan"
+        tools:layout="@layout/fragment_my_job_detail">
+        <action
+            android:id="@+id/action_myJobDetail_to_editJob"
+            app:destination="@id/editJobFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editJobFragment"
+        android:name="com.proweb.jobskuy.ui.home.EditJobFragment"
+        android:label="Edit Lowongan"
+        tools:layout="@layout/fragment_edit_job" />
 
     <fragment
         android:id="@+id/applicantListFragment"
         android:name="com.proweb.jobskuy.ui.home.ApplicantListFragment"
         android:label="Daftar Pelamar"
-        tools:layout="@layout/fragment_applicant_list" />
+        tools:layout="@layout/fragment_applicant_list">
+        <action
+            android:id="@+id/action_applicantList_to_applicantDetail"
+            app:destination="@id/applicantDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/applicantDetailFragment"
+        android:name="com.proweb.jobskuy.ui.home.ApplicantDetailFragment"
+        android:label="Detail Berkas Pelamar"
+        tools:layout="@layout/fragment_applicant_detail">
+        <action
+            android:id="@+id/action_applicantDetail_to_profileSeekerFragment"
+            app:destination="@id/profileSeekerFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
@@ -128,7 +162,17 @@
         android:id="@+id/myApplicationsFragment"
         android:name="com.proweb.jobskuy.ui.home.MyApplicationsFragment"
         android:label="Lamaran Saya"
-        tools:layout="@layout/fragment_my_applications" />
+        tools:layout="@layout/fragment_my_applications">
+        <action
+            android:id="@+id/action_myApplications_to_myApplicationDetail"
+            app:destination="@id/myApplicationDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/myApplicationDetailFragment"
+        android:name="com.proweb.jobskuy.ui.home.MyApplicationDetailFragment"
+        android:label="Detail Status Lamaran"
+        tools:layout="@layout/fragment_my_application_detail" />
 
     <fragment
         android:id="@+id/profileSeekerFragment"
@@ -140,7 +184,17 @@
         android:id="@+id/jobDetailFragment"
         android:name="com.proweb.jobskuy.ui.home.JobDetailFragment"
         android:label="Detail Pekerjaan"
-        tools:layout="@layout/fragment_job_detail" />
+        tools:layout="@layout/fragment_job_detail">
+        <action
+            android:id="@+id/action_jobDetail_to_applyJob"
+            app:destination="@id/applyJobFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/applyJobFragment"
+        android:name="com.proweb.jobskuy.ui.home.ApplyJobFragment"
+        android:label="Form Lamaran Kerja"
+        tools:layout="@layout/fragment_apply_job" />
 
     <fragment
         android:id="@+id/profileAccountSeekerFragment"

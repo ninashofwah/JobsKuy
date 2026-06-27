@@ -3,4 +3,12 @@
     <string name="no_jobs_published">Belum ada lowongan yang dipublikasikan</string>
     <string name="my_jobs_title">Daftar Lowongan Saya</string>
     <string name="my_jobs_subtitle">Arsip data pekerjaan aktif yang Anda publikasikan</string>
+    <string name="my_applications_title">Lamaran Saya</string>
+    <string name="status_format">Status: %1$s</string>
+    <string name="loading_job_details">Memuat rincian lowongan...</string>
+    <string name="default_job_title">Lowongan Pekerjaan</string>
+    <string name="detail_lamaran_back">← Detail Lamaran</string>
+    <string name="status_lamaran_kerja">📌 Status Lamaran Kerja</string>
+    <string name="berkas_dikirim">📂 Berkas yang Anda Kirim</string>
+    <string name="feedback_recruiter">💬 Masukan dari Penyedia Kerja</string>
 </resources>

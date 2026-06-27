@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jadwalkan Wawancara"
+        android:textStyle="bold"
+        android:textColor="#38A169"
+        android:layout_marginBottom="12dp"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pilih Tanggal" android:textSize="12sp"/>
+    <EditText
+        android:id="@+id/etInterviewDate"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:hint="Contoh: Senin, 30 Maret 2026"
+        android:textSize="14sp"
+        android:layout_marginBottom="10dp"
+        android:inputType="text"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pilih Waktu" android:textSize="12sp"/>
+    <EditText
+        android:id="@+id/etInterviewTime"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:hint="Contoh: 10.00 WIB s/d Selesai"
+        android:textSize="14sp"
+        android:layout_marginBottom="10dp"
+        android:inputType="text"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tempat / Link Pertemuan" android:textSize="12sp"/>
+    <EditText
+        android:id="@+id/etInterviewLocation"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:hint="Contoh: Kantor Utama / Google Meet Link"
+        android:textSize="14sp"
+        android:inputType="text"/>
+</LinearLayout>

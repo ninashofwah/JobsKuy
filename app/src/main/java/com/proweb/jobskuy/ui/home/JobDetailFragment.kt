@@ -2,13 +2,10 @@ package com.proweb.jobskuy.ui.home
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.proweb.jobskuy.R
-import com.proweb.jobskuy.data.Application
 import com.proweb.jobskuy.data.Job
 import com.proweb.jobskuy.databinding.FragmentJobDetailBinding
 
@@ -17,48 +14,34 @@ class JobDetailFragment : Fragment(R.layout.fragment_job_detail) {
     private var _binding: FragmentJobDetailBinding? = null
     private val binding get() = _binding!!
     private val db = FirebaseFirestore.getInstance()
-    private val auth = FirebaseAuth.getInstance()
-    private var targetJob: Job? = null
+    private var currentJobId: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentJobDetailBinding.bind(view)
 
-        val jobId = arguments?.getString("JOB_ID") ?: return
+        currentJobId = arguments?.getString("JOB_ID")
 
-        db.collection("jobs").document(jobId).get().addOnSuccessListener { doc ->
-            if (doc != null) {
-                targetJob = doc.toObject(Job::class.java)
-                binding.tvDetailTitle.text = targetJob?.jobTitle
-                binding.tvDetailCompany.text = targetJob?.companyName
-                binding.tvDetailSalary.text = targetJob?.salary
-                binding.tvDetailDesc.text = targetJob?.jobDescription
-                binding.tvDetailDocs.text = targetJob?.requiredDocuments
-            }
+        if (currentJobId != null) {
+            db.collection("jobs").document(currentJobId!!).get()
+                .addOnSuccessListener { doc ->
+                    if (isAdded && _binding != null && doc.exists()) {
+                        val job = doc.toObject(Job::class.java)
+                        if (job != null) {
+                            binding.tvDetailJobTitle.text = job.jobTitle
+                            binding.tvDetailCompanyName.text = job.companyName
+                            binding.tvDetailSalary.text = "Gaji: Rp ${job.salary}"
+                            binding.tvDetailDescription.text = job.jobDescription
+                            binding.tvDetailRequiredDocs.text = job.requiredDocuments
+                        }
+                    }
+                }
         }
 
-        binding.btnApplyJob.setOnClickListener {
-            val user = auth.currentUser
-            val job = targetJob
-            if (user != null && job != null) {
-                val appRef = db.collection("applications").document()
-                val newApp = Application(
-                    applicationId = appRef.id,
-                    jobId = job.jobId,
-                    recruiterUid = job.recruiterUid,
-                    seekerUid = user.uid,
-                    seekerName = user.email?.substringBefore("@") ?: "Pelamar Kerja",
-                    jobTitle = job.jobTitle,
-                    companyName = job.companyName,
-                    appliedAt = System.currentTimeMillis(),
-                    status = "Diproses" // Status awal pelacakan lamaran
-                )
-
-                appRef.set(newApp).addOnSuccessListener {
-                    Toast.makeText(context, "Sukses melamar pekerjaan!", Toast.LENGTH_SHORT).show()
-                    findNavController().popBackStack()
-                }
-            }
+        binding.btnNavigateToApply.setOnClickListener {
+            val bundle = Bundle().apply { putString("JOB_ID", currentJobId) }
+            // PERBAIKAN MUTLAK: Menggunakan rute aksi milik JobDetailFragment secara sah
+            findNavController().navigate(R.id.action_jobDetail_to_applyJob, bundle)
         }
     }
 

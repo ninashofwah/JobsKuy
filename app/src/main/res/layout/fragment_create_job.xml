@@ -9,120 +9,111 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="24dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Penyedia Kerja (Nama UMKM)"
-            android:textStyle="bold"
+            android:text="← Buat Lowongan Baru"
             android:textColor="#2D3748"
-            android:layout_marginBottom="4dp"/>
-        <EditText
-            android:id="@+id/etCompanyName"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@android:drawable/editbox_background"
-            android:hint="Contoh: Warung Makmur Sejahtera"
-            android:inputType="text"
-            android:paddingHorizontal="12dp"
-            android:layout_marginBottom="16dp"/>
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Posisi Pekerjaan"
-            android:textStyle="bold"
-            android:textColor="#2D3748"
-            android:layout_marginBottom="4dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nama Pekerjaan" android:textStyle="bold" android:textColor="#2D3748" android:textSize="16sp"/>
         <EditText
             android:id="@+id/etJobTitle"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:hint="Contoh: Satpam"
             android:background="@android:drawable/editbox_background"
-            android:hint="Contoh: Supervisor Restoran"
-            android:inputType="text"
             android:paddingHorizontal="12dp"
             android:layout_marginBottom="16dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Deskripsi Pekerjaan"
-            android:textStyle="bold"
-            android:textColor="#2D3748"
-            android:layout_marginBottom="4dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nama Perusahaan / UMKM" android:textStyle="bold" android:textColor="#2D3748" android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/etCompanyName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Contoh: Yayasan ABC"
+            android:background="@android:drawable/editbox_background"
+            android:paddingHorizontal="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Deskripsi Pekerjaan" android:textStyle="bold" android:textColor="#2D3748" android:textSize="16sp"/>
         <EditText
             android:id="@+id/etJobDescription"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@android:drawable/editbox_background"
-            android:hint="Tulis deskripsi tugas pekerjaan..."
-            android:inputType="textMultiLine"
+            android:layout_height="120dp"
             android:gravity="top|start"
+            android:hint="Masukkan deskripsi tugas kerja..."
+            android:background="@android:drawable/editbox_background"
             android:padding="12dp"
             android:layout_marginBottom="16dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Persyaratan Dokumen"
-            android:textStyle="bold"
-            android:textColor="#2D3748"
-            android:layout_marginBottom="4dp"/>
-        <EditText
-            android:id="@+id/etRequiredDocuments"
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Syarat Dokumen Tambahan" android:textStyle="bold" android:textColor="#2D3748" android:textSize="16sp" android:layout_marginBottom="4dp"/>
+
+        <LinearLayout
+            android:id="@+id/containerDocumentBadges"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@android:drawable/editbox_background"
-            android:hint="Contoh: CV, Fotokopi KTP, Ijazah"
-            android:inputType="textMultiLine"
-            android:gravity="top|start"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Batas Maksimal Pelamar"
-            android:textStyle="bold"
-            android:textColor="#2D3748"
-            android:layout_marginBottom="4dp"/>
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+            <EditText
+                android:id="@+id/etInputDocumentName"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:hint="Ketik dokumen (Misal: Ijazah, SKCK)"
+                android:textSize="14sp"
+                android:background="@android:drawable/editbox_background"
+                android:paddingHorizontal="12dp"/>
+            <Button
+                android:id="@+id/btnAddDocumentBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="8dp"
+                android:text="+ Tambah"
+                android:textColor="#2D3748"
+                android:backgroundTint="#E2E8F0"
+                android:textSize="13sp"
+                app:cornerRadius="8dp"/>
+        </LinearLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Batas Maksimal Pelamar Kerja" android:textStyle="bold" android:textColor="#2D3748" android:textSize="16sp"/>
         <EditText
             android:id="@+id/etMaxApplicants"
-            android:layout_width="match_parent"
+            android:layout_width="120dp"
             android:layout_height="50dp"
-            android:background="@android:drawable/editbox_background"
-            android:hint="Contoh: 150"
             android:inputType="number"
+            android:background="@android:drawable/editbox_background"
             android:paddingHorizontal="12dp"
             android:layout_marginBottom="16dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gaji / Bulan"
-            android:textStyle="bold"
-            android:textColor="#2D3748"
-            android:layout_marginBottom="4dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rentang Gaji" android:textStyle="bold" android:textColor="#2D3748" android:textSize="16sp"/>
         <EditText
             android:id="@+id/etSalary"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:hint="Contoh : Rp 3.000.000.-"
             android:background="@android:drawable/editbox_background"
-            android:hint="Contoh: Rp 4,500,000 - Rp 5,500,000"
-            android:inputType="text"
             android:paddingHorizontal="12dp"
             android:layout_marginBottom="24dp"/>
 
         <Button
             android:id="@+id/btnSaveJob"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:text="Post Lowongan"
+            android:layout_height="56dp"
+            android:text="Pasang Lowongan"
             android:textColor="@color/white"
-            android:backgroundTint="#5B93D3"
+            android:backgroundTint="#4A77B4"
             android:textStyle="bold"
-            app:cornerRadius="8dp"/>
+            app:cornerRadius="12dp"/>
     </LinearLayout>
 </ScrollView>

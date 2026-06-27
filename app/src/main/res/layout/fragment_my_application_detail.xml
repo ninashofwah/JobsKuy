@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F7FE">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← Detail Lamaran"
+            android:textColor="#2D3748"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Ringkasan Posisi Kerja Yang Dilamar -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="14dp"
+            android:layout_marginBottom="24dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+                <TextView android:id="@+id/tvMyBadgeJobTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Posisi Kerja" android:textSize="16sp" android:textStyle="bold" android:textColor="#2B6CB0"/>
+                <TextView android:id="@+id/tvMyBadgeCompanyName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nama Instansi" android:textColor="#718096" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- SEKSI LINIMASA STATUS UPDATE RECRUITER -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📌 Status Lamaran Kerja" android:textStyle="bold" android:textColor="#4A5568" android:layout_marginBottom="12dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvTimelineStatusText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Status: Mengambil Data..."
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#2D3748"/>
+
+                <!-- Tombol aksi Detail Jadwal Wawancara (Akan muncul jika status 'Wawancara') -->
+                <Button
+                    android:id="@+id/btnViewInterviewSchedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Detail Jadwal Wawancara"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="#38A169"
+                    android:visibility="gone"
+                    app:cornerRadius="6dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- KONDISIONAL CARD: PESAN MASUKAN JIKA RECRUITER MENOLAK -->
+        <LinearLayout
+            android:id="@+id/layoutRejectionFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginBottom="20dp">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💬 Masukan dari Penyedia Kerja" android:textStyle="bold" android:textColor="#E53E3E" android:layout_marginBottom="6dp"/>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="#FFF5F5">
+                <TextView
+                    android:id="@+id/tvRejectionFeedbackNotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="-"
+                    android:textColor="#C53030"
+                    android:textSize="14sp"/>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <!-- Info Berkas Yang Pernah Dikirim Seeker -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📂 Berkas yang Anda Kirim" android:textStyle="bold" android:textColor="#4A5568" android:layout_marginBottom="8dp"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp">
+            <TextView
+                android:id="@+id/tvMySubmittedDocs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Memuat data dokumen..."
+                android:textColor="#4A5568"
+                android:textSize="14sp"/>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>

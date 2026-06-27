@@ -12,64 +12,149 @@
         android:padding="24dp">
 
         <TextView
+            android:id="@+id/tvProfileTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="💼 Portofolio Profil Publik"
+            android:text="Profil Publik"
             android:textColor="#2D3748"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_marginBottom="4dp"/>
+            android:layout_marginBottom="20dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/ivPublicProfilePhoto"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@android:drawable/sym_def_app_icon"
+                    android:scaleType="centerCrop"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView
+                    android:id="@+id/tvPublicName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Pencari Kerja"
+                    android:textColor="#2D3748"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/tvPublicHeadline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Android Developer | Ilmu Komputer Student"
+                    android:textColor="#4A5568"
+                    android:textSize="14sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data publik ini akan dapat ditinjau oleh Penyedia Kerja saat Anda melamar."
-            android:textColor="#718096"
-            android:textSize="13sp"
-            android:layout_marginBottom="24dp"/>
+            android:text="📹 Video Perkenalan Diri"
+            android:textStyle="bold"
+            android:textColor="#2B6CB0"
+            android:layout_marginBottom="8dp"/>
 
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tautan Dokumen CV (URL)" android:textStyle="bold" android:textColor="#4A5568"/>
-        <EditText
-            android:id="@+id/etProfileDocsLink"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@android:drawable/editbox_background"
-            android:hint="https://drive.google.com/cv-anda"
-            android:inputType="textUri"
-            android:paddingHorizontal="12dp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            android:layout_marginBottom="16dp">
 
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tautan Video Perkenalan (URL)" android:textStyle="bold" android:textColor="#4A5568"/>
-        <EditText
-            android:id="@+id/etProfileVideoLink"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@android:drawable/editbox_background"
-            android:hint="https://youtube.com/video-singkat"
-            android:inputType="textUri"
-            android:paddingHorizontal="12dp"
-            android:layout_marginBottom="16dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
 
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ringkasan Pengalaman Kerja" android:textStyle="bold" android:textColor="#4A5568"/>
-        <EditText
-            android:id="@+id/etProfileExperience"
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#000000">
+
+                    <VideoView
+                        android:id="@+id/vvIntroductionVideo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/tvVideoPlaceholder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Video belum diunggah"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center"
+                        android:visibility="gone"/>
+                </FrameLayout>
+
+                <Button
+                    android:id="@+id/btnUploadVideo"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Unggah / Ganti Video Perkenalan"
+                    android:backgroundTint="#2B6CB0"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:visibility="gone"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="💼 Riwayat Pengalaman Kerja"
+            android:textStyle="bold"
+            android:textColor="#4A5568"
+            android:layout_marginBottom="8dp"/>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@android:drawable/editbox_background"
-            android:hint="Ceritakan singkat riwayat pengalaman kerja..."
-            android:inputType="textMultiLine"
-            android:gravity="top|start"
-            android:padding="12dp"
-            android:layout_marginBottom="32dp"/>
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            android:layout_marginBottom="16dp">
+
+            <EditText
+                android:id="@+id/etPublicExperience"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="3"
+                android:gravity="top|start"
+                android:padding="16dp"
+                android:hint="Belum ada riwayat pengalaman kerja."
+                android:background="@android:color/transparent"
+                android:textColor="#2D3748"
+                android:textSize="14sp"/>
+        </androidx.cardview.widget.CardView>
 
         <Button
-            android:id="@+id/btnSaveSeekerProfile"
+            android:id="@+id/btnSavePublicProfile"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="50dp"
             android:text="Simpan Profil Publik"
             android:textColor="@color/white"
-            android:backgroundTint="#5B93D3"
+            android:backgroundTint="#38A169"
             android:textStyle="bold"
-            app:cornerRadius="12dp"/>
+            android:visibility="gone"
+            app:cornerRadius="10dp"/>
+
     </LinearLayout>
 </ScrollView>

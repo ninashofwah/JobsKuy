@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pesan Semangat &amp; Masukan :"
+        android:textStyle="bold"
+        android:textColor="#E53E3E"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/etRejectFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="top|start"
+        android:hint="Contoh: Terima kasih sudah mendaftar, mohon tingkatkan portofolio pengerjaan Anda..."
+        android:textSize="14sp"
+        android:background="@android:drawable/editbox_background"
+        android:padding="10dp"/>
+</LinearLayout>

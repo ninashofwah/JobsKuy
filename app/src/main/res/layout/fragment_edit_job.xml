@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F7FE">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✏️ Edit Data Lowongan"
+            android:textColor="#2D3748"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nama Penyedia Kerja / UMKM" android:textStyle="bold" android:textColor="#4A5568"/>
+        <EditText
+            android:id="@+id/etEditCompanyName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:drawable/editbox_background"
+            android:paddingHorizontal="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Posisi Pekerjaan" android:textStyle="bold" android:textColor="#4A5568"/>
+        <EditText
+            android:id="@+id/etEditJobTitle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:drawable/editbox_background"
+            android:paddingHorizontal="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Gaji / Bulan" android:textStyle="bold" android:textColor="#4A5568"/>
+        <EditText
+            android:id="@+id/etEditSalary"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:drawable/editbox_background"
+            android:paddingHorizontal="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Deskripsi Pekerjaan" android:textStyle="bold" android:textColor="#4A5568"/>
+        <EditText
+            android:id="@+id/etEditJobDescription"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@android:drawable/editbox_background"
+            android:gravity="top|start"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Persyaratan Dokumen" android:textStyle="bold" android:textColor="#4A5568"/>
+        <EditText
+            android:id="@+id/etEditRequiredDocuments"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@android:drawable/editbox_background"
+            android:gravity="top|start"
+            android:padding="12dp"
+            android:layout_marginBottom="32dp"/>
+
+        <Button
+            android:id="@+id/btnUpdateJob"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Simpan Perubahan Data"
+            android:textColor="@color/white"
+            android:backgroundTint="#5B93D3"
+            android:textStyle="bold"
+            app:cornerRadius="12dp"/>
+    </LinearLayout>
+</ScrollView>

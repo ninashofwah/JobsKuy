@@ -7,7 +7,7 @@ data class Application(
     val seekerUid: String = "",         // ID Pencari Kerja yang melamar
     val seekerName: String = "",        // Nama lengkap pelamar
     val jobTitle: String = "",          // Posisi lowongan yang dilamar
-    val companyName: String = "",       // Nama UMKM
+    val companyName: String = "",       // Nama
     val appliedAt: Long = 0,
     val status: String = "Pending"      // Status lamaran (Pending / Diterima / Ditolak)
 )
