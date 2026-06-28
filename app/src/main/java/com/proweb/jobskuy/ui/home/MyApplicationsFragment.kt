@@ -1,9 +1,12 @@
 package com.proweb.jobskuy.ui.home
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -75,12 +78,14 @@ class MyApplicationsFragment : Fragment(R.layout.fragment_my_applications) {
     ) : RecyclerView.Adapter<ApplicationsAdapter.ViewHolder>() {
 
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val title: TextView = view.findViewById(R.id.tvItemApplicantEmail)
-            val status: TextView = view.findViewById(R.id.tvItemApplicantStatus)
+            val photo: ImageView = view.findViewById(R.id.ivItemJobPhoto)
+            val title: TextView = view.findViewById(R.id.tvItemJobTitle)
+            val company: TextView = view.findViewById(R.id.tvItemJobCompany)
+            val status: TextView = view.findViewById(R.id.tvItemJobExtraStatus)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_applicant, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_job_card, parent, false)
             return ViewHolder(view)
         }
 
@@ -89,28 +94,35 @@ class MyApplicationsFragment : Fragment(R.layout.fragment_my_applications) {
             val jobId = data["jobId"] as? String ?: ""
             val statusStr = data["status"] as? String ?: "Diproses"
 
-            holder.title.text = "Memuat rincian..."
-            holder.status.text = "Status: $statusStr"
+            holder.title.text = "Memuat data..."
+            holder.company.text = "-"
+            holder.status.text = "• $statusStr"
+            holder.status.visibility = View.VISIBLE
+            holder.photo.setImageResource(android.R.drawable.ic_menu_gallery)
 
-            // SINKRONISASI WARNA STATUS DI LIST ITEM HALAMAN DEPAN
             val context = holder.itemView.context
             when (statusStr) {
-                "Wawancara" -> {
-                    holder.status.setTextColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
-                }
-                "Ditolak" -> {
-                    holder.status.setTextColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
-                }
-                else -> {
-                    holder.status.setTextColor(ContextCompat.getColor(context, android.R.color.holo_blue_dark))
-                }
+                "Wawancara" -> holder.status.setTextColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
+                "Ditolak" -> holder.status.setTextColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
+                else -> holder.status.setTextColor(ContextCompat.getColor(context, android.R.color.holo_blue_dark))
             }
 
+            // LOAD DATA GAMBAR LOKASI DAN IDENTITAS LOWONGAN DARI TABEL JOBS
             if (jobId.isNotEmpty()) {
                 FirebaseFirestore.getInstance().collection("jobs").document(jobId).get()
                     .addOnSuccessListener { doc ->
                         if (doc.exists()) {
                             holder.title.text = doc.getString("jobTitle") ?: "Lowongan Pekerjaan"
+                            holder.company.text = doc.getString("companyName") ?: "Instansi"
+
+                            val jobImgBase64 = doc.getString("jobImage") ?: ""
+                            if (jobImgBase64.isNotEmpty()) {
+                                try {
+                                    val bytes = Base64.decode(jobImgBase64, Base64.DEFAULT)
+                                    val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                                    holder.photo.setImageBitmap(bitmap)
+                                } catch (e: Exception) { e.printStackTrace() }
+                            }
                         }
                     }
             }

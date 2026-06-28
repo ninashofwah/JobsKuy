@@ -16,17 +16,17 @@
         android:padding="16dp">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:cardCornerRadius="25dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:cardCornerRadius="8dp"
             android:layout_marginEnd="16dp"
-            app:cardBackgroundColor="#E2E8F0">
+            app:cardBackgroundColor="#CBD5E0">
             <ImageView
-                android:id="@+id/ivItemApplicantPhoto"
+                android:id="@+id/ivItemMyJobPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@android:drawable/sym_def_app_icon"/>
+                android:src="@android:drawable/ic_menu_gallery"/>
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
@@ -36,31 +36,22 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvItemApplicantName"
+                android:id="@+id/tvItemMyJobTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nama Pelamar"
+                android:text="Judul Pekerjaan"
                 android:textColor="#2D3748"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvItemApplicantEmail"
+                android:id="@+id/tvItemMyJobCompany"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="email@pelamar.com"
+                android:text="Nama Perusahaan"
                 android:textColor="#718096"
                 android:textSize="13sp"
                 android:layout_marginTop="2dp" />
-
-            <TextView
-                android:id="@+id/tvItemApplicantStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="• Diproses"
-                android:textSize="13sp"
-                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

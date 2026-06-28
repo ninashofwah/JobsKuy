@@ -8,64 +8,57 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
+        <!-- FOTO LOKASI HEADER UTAMA SESUAI FIGMA -->
+        <ImageView
+            android:id="@+id/ivJobDetailHeaderImage"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:scaleType="centerCrop"
+            android:background="#CBD5E0"
+            android:src="@android:drawable/ic_menu_gallery"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
-            android:layout_marginBottom="24dp">
+            android:orientation="vertical"
+            android:padding="24dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tvJobDetailTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:text="Nama Lowongan"
+                android:textColor="#2D3748"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvDetailJobTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nama Pekerjaan"
-                    android:textColor="#2D3748"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvJobDetailCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Perusahaan"
+                android:textColor="#4A5568"
+                android:textSize="16sp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"/>
 
-                <TextView
-                    android:id="@+id/tvDetailCompanyName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Nama Instansi"
-                    android:textColor="#718096"
-                    android:textSize="16sp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Gaji / Upah" android:textStyle="bold" android:textColor="#2D3748"/>
+            <TextView android:id="@+id/tvJobDetailSalary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-" android:textColor="#2B6CB0" android:textSize="15sp" android:layout_marginBottom="16dp"/>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#E2E8F0"
-                    android:layout_marginVertical="16dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Deskripsi Pekerjaan" android:textStyle="bold" android:textColor="#2D3748"/>
+            <TextView android:id="@+id/tvJobDetailDescription" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="-" android:textColor="#4A5568" android:layout_marginTop="4dp" android:layout_marginBottom="24dp"/>
 
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💰 Gaji / Upah Bulanan" android:textColor="#718096" android:textSize="12sp" android:textStyle="bold"/>
-                <TextView android:id="@+id/tvDetailSalary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rp -" android:textSize="16sp" android:textColor="#2B6CB0" android:textStyle="bold" android:layout_marginBottom="16dp"/>
-
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📋 Deskripsi Pekerjaan" android:textColor="#718096" android:textSize="12sp" android:textStyle="bold"/>
-                <TextView android:id="@+id/tvDetailDescription" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="-" android:textSize="14sp" android:textColor="#4A5568" android:layout_marginBottom="16dp"/>
-
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📂 Syarat Dokumen Wajib" android:textColor="#718096" android:textSize="12sp" android:textStyle="bold"/>
-                <TextView android:id="@+id/tvDetailRequiredDocs" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="-" android:textSize="14sp" android:textColor="#4A5568"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <Button
-            android:id="@+id/btnNavigateToApply"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="Melamar Sekarang"
-            android:textColor="@color/white"
-            android:backgroundTint="#2B6CB0"
-            android:textStyle="bold"
-            app:cornerRadius="12dp"/>
+            <Button
+                android:id="@+id/btnApplyJobNow"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Melamar Pekerjaan"
+                android:textColor="@color/white"
+                android:backgroundTint="#4A77B4"
+                android:textStyle="bold"
+                app:cornerRadius="10dp"/>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -1,19 +1,28 @@
 package com.proweb.jobskuy.ui.home
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.util.Base64
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.proweb.jobskuy.R
 import com.proweb.jobskuy.data.Job
 import com.proweb.jobskuy.databinding.FragmentCreateJobBinding
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
 
 class CreateJobFragment : Fragment(R.layout.fragment_create_job) {
 
@@ -23,37 +32,43 @@ class CreateJobFragment : Fragment(R.layout.fragment_create_job) {
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
-    // Menyimpan daftar nama dokumen tambahan yang diinput oleh recruiter
     private val dynamicDocumentRequirements = mutableListOf<String>()
+    private var jobImageBase64: String = ""
+
+    // Variabel penampung koordinat lokasi recruiter yang ditarik dari profil registrasi
+    private var recruiterLatitude: Double = 0.0
+    private var recruiterLongitude: Double = 0.0
+
+    private val imageLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val uri = result.data?.data
+            if (uri != null) processJobImage(uri)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentCreateJobBinding.bind(view)
 
-        // 1. Logika Klik Tombol "+ Tambah" Dokumen Berkas Baru
-        binding.btnAddDocumentBadge.setOnClickListener {
-            val docName = binding.etInputDocumentName.text.toString().trim()
-            if (docName.isEmpty()) {
-                Toast.makeText(context, "Ketik nama dokumen dahulu!", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+        // 1. AMBIL KOORDINAT LOKASI ASLI RECRUITER DARI PROFILE USERS SEJAK AWAL
+        loadRecruiterLocationProfile()
 
-            if (dynamicDocumentRequirements.contains(docName)) {
-                Toast.makeText(context, "Syarat dokumen sudah ditambahkan!", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            // Tambahkan ke list data lokal
-            dynamicDocumentRequirements.add(docName)
-
-            // Gambar Badge Baru ke dalam Layar UI secara real-time
-            addBadgeToContainer(docName)
-
-            // Bersihkan kolom input setelah selesai ditambahkan
-            binding.etInputDocumentName.text.clear()
+        binding.btnSelectJobImage.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT).apply { type = "image/*" }
+            imageLauncher.launch(intent)
         }
 
-        // 2. Kirim Form Data Lowongan Akhir ke Server Cloud Firestore
+        binding.btnAddDocumentBadge.setOnClickListener {
+            val docName = binding.etInputDocumentName.text.toString().trim()
+            if (docName.isNotEmpty() && !dynamicDocumentRequirements.contains(docName)) {
+                dynamicDocumentRequirements.add(docName)
+                addBadgeToContainer(docName)
+                binding.etInputDocumentName.text.clear()
+            }
+        }
+
         binding.btnSaveJob.setOnClickListener {
             val company = binding.etCompanyName.text.toString().trim()
             val title = binding.etJobTitle.text.toString().trim()
@@ -61,82 +76,78 @@ class CreateJobFragment : Fragment(R.layout.fragment_create_job) {
             val maxStr = binding.etMaxApplicants.text.toString().trim()
             val salary = binding.etSalary.text.toString().trim()
 
-            val currentUser = auth.currentUser
-            if (currentUser == null) {
-                Toast.makeText(context, "Sesi habis, silakan login kembali.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
             if (company.isEmpty() || title.isEmpty() || desc.isEmpty() || maxStr.isEmpty() || salary.isEmpty()) {
-                Toast.makeText(context, "Harap lengkapi seluruh kolom isian lowongan!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Lengkapi semua data lowongan!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // MENGGABUNGKAN LIST MENJADI STRING TEKS SEPERTI: "Ijazah, SKCK, Video"
             val requiredDocsString = dynamicDocumentRequirements.joinToString(", ")
-
-            val maxApplicants = maxStr.toIntOrNull() ?: 0
             val jobDocRef = db.collection("jobs").document()
 
+            // 3. SEKARANG LOKASI OTOMATIS TERISI DARI KOORDINAT PROFIL RECRUITER
             val newJob = Job(
                 jobId = jobDocRef.id,
-                recruiterUid = currentUser.uid,
+                recruiterUid = auth.currentUser?.uid ?: "",
                 companyName = company,
                 jobTitle = title,
                 jobDescription = desc,
-                requiredDocuments = requiredDocsString, // Tersimpan rapi dalam bentuk string terpisah koma
-                maxApplicants = maxApplicants,
-                currentApplicants = 0,
+                requiredDocuments = requiredDocsString,
+                maxApplicants = maxStr.toIntOrNull() ?: 0,
                 salary = salary,
+                jobImage = jobImageBase64,
+                latitude = recruiterLatitude,   // Terisi koordinat registrasi
+                longitude = recruiterLongitude, // Terisi koordinat registrasi
+                isClosed = false,
                 createdAt = System.currentTimeMillis()
             )
 
-            binding.btnSaveJob.isEnabled = false
-
-            jobDocRef.set(newJob)
-                .addOnSuccessListener {
-                    if (isAdded && _binding != null) {
-                        Toast.makeText(context, "Lowongan Berhasil Diunggah!", Toast.LENGTH_SHORT).show()
-                        binding.btnSaveJob.isEnabled = true
-                        findNavController().popBackStack()
-                    }
-                }
-                .addOnFailureListener { e ->
-                    if (isAdded && _binding != null) {
-                        binding.btnSaveJob.isEnabled = true
-                        Toast.makeText(context, "Gagal: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
-                    }
-                }
+            jobDocRef.set(newJob).addOnSuccessListener {
+                Toast.makeText(context, "Lowongan Berhasil Dipasang dengan Lokasi Terkunci!", Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack()
+            }
         }
     }
 
     /**
-     * Menggambar badge tombol dinamis yang bisa dihapus kembali saat diklik oleh Recruiter
+     * Fungsi mengambil data profil koordinat GPS recruiter saat awal registrasi
      */
+    private fun loadRecruiterLocationProfile() {
+        val currentUid = auth.currentUser?.uid ?: return
+        db.collection("users").document(currentUid).get()
+            .addOnSuccessListener { doc ->
+                if (isAdded && _binding != null && doc.exists()) {
+                    // Ambil latitude & longitude bawaan registrasi perfil, default 0.0 jika kosong
+                    recruiterLatitude = doc.getDouble("latitude") ?: 0.0
+                    recruiterLongitude = doc.getDouble("longitude") ?: 0.0
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, "Gagal sinkronisasi data lokasi profil.", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun processJobImage(uri: Uri) {
+        try {
+            val inputStream: InputStream? = requireContext().contentResolver.openInputStream(uri)
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 25, baos)
+            jobImageBase64 = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT)
+            binding.ivJobLocationPreview.setImageBitmap(bitmap)
+        } catch (e: Exception) { e.printStackTrace() }
+    }
+
     private fun addBadgeToContainer(name: String) {
-        val badgeButton = MaterialButton(requireContext()).apply {
+        val badgeButton = Button(requireContext()).apply {
             text = "📄 $name"
             textSize = 12f
             setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
             backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.white)
-            strokeColor = ContextCompat.getColorStateList(requireContext(), R.color.black)
-            strokeWidth = 2
-
-            layoutParams = LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            ).apply {
-                setMargins(0, 0, 12, 0)
-            }
-
-            // BONUS KEMUDAHAN: Jika badge diklik kembali oleh recruiter, maka syarat tersebut dibatalkan
             setOnClickListener {
                 dynamicDocumentRequirements.remove(name)
-                binding.containerDocumentBadges.removeView(this)
-                Toast.makeText(context, "$name dihapus dari syarat", Toast.LENGTH_SHORT).show()
+                (parent as? ViewGroup)?.removeView(this)
             }
         }
-
         binding.containerDocumentBadges.addView(badgeButton)
     }
 

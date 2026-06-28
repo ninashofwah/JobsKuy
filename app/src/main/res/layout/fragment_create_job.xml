@@ -18,8 +18,31 @@
             android:textColor="#2D3748"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="20dp"/>
 
+        <!-- SEKSI BARU: UPLOAD FOTO LOKASI TEMPAT KERJA -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Foto Lokasi Tempat Kerja" android:textStyle="bold" android:textColor="#2D3748" android:textSize="16sp" android:layout_marginBottom="6dp"/>
+        <ImageView
+            android:id="@+id/ivJobLocationPreview"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:scaleType="centerCrop"
+            android:background="#E2E8F0"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnSelectJobImage"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Pilih Foto Lokasi"
+            android:textSize="12sp"
+            android:backgroundTint="#E2E8F0"
+            android:textColor="#2D3748"
+            android:layout_marginBottom="16dp"
+            app:cornerRadius="8dp"/>
+
+        <!-- Nama Pekerjaan -->
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nama Pekerjaan" android:textStyle="bold" android:textColor="#2D3748" android:textSize="16sp"/>
         <EditText
             android:id="@+id/etJobTitle"
@@ -30,6 +53,7 @@
             android:paddingHorizontal="12dp"
             android:layout_marginBottom="16dp"/>
 
+        <!-- Nama Perusahaan -->
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nama Perusahaan / UMKM" android:textStyle="bold" android:textColor="#2D3748" android:textSize="16sp"/>
         <EditText
             android:id="@+id/etCompanyName"
@@ -40,71 +64,33 @@
             android:paddingHorizontal="12dp"
             android:layout_marginBottom="16dp"/>
 
+        <!-- Deskripsi Pekerjaan -->
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Deskripsi Pekerjaan" android:textStyle="bold" android:textColor="#2D3748" android:textSize="16sp"/>
         <EditText
             android:id="@+id/etJobDescription"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="100dp"
             android:gravity="top|start"
             android:hint="Masukkan deskripsi tugas kerja..."
             android:background="@android:drawable/editbox_background"
             android:padding="12dp"
             android:layout_marginBottom="16dp"/>
 
+        <!-- Syarat Dokumen Tambahan -->
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Syarat Dokumen Tambahan" android:textStyle="bold" android:textColor="#2D3748" android:textSize="16sp" android:layout_marginBottom="4dp"/>
-
-        <LinearLayout
-            android:id="@+id/containerDocumentBadges"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
-            <EditText
-                android:id="@+id/etInputDocumentName"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:hint="Ketik dokumen (Misal: Ijazah, SKCK)"
-                android:textSize="14sp"
-                android:background="@android:drawable/editbox_background"
-                android:paddingHorizontal="12dp"/>
-            <Button
-                android:id="@+id/btnAddDocumentBadge"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:text="+ Tambah"
-                android:textColor="#2D3748"
-                android:backgroundTint="#E2E8F0"
-                android:textSize="13sp"
-                app:cornerRadius="8dp"/>
+        <LinearLayout android:id="@+id/containerDocumentBadges" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="8dp" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="16dp">
+            <EditText android:id="@+id/etInputDocumentName" android:layout_width="0dp" android:layout_height="45dp" android:layout_weight="1" android:hint="Ketik dokumen (Misal: Ijazah)" android:textSize="14sp" android:background="@android:drawable/editbox_background" android:paddingHorizontal="12dp"/>
+            <Button android:id="@+id/btnAddDocumentBadge" android:layout_width="wrap_content" android:layout_height="45dp" android:layout_marginStart="8dp" android:text="+ Tambah" android:textColor="#2D3748" android:backgroundTint="#E2E8F0" app:cornerRadius="8dp"/>
         </LinearLayout>
 
+        <!-- Batas Maksimal Pelamar -->
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Batas Maksimal Pelamar Kerja" android:textStyle="bold" android:textColor="#2D3748" android:textSize="16sp"/>
-        <EditText
-            android:id="@+id/etMaxApplicants"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:inputType="number"
-            android:background="@android:drawable/editbox_background"
-            android:paddingHorizontal="12dp"
-            android:layout_marginBottom="16dp"/>
+        <EditText android:id="@+id/etMaxApplicants" android:layout_width="120dp" android:layout_height="50dp" android:inputType="number" android:background="@android:drawable/editbox_background" android:paddingHorizontal="12dp" android:layout_marginBottom="16dp"/>
 
+        <!-- Rentang Gaji -->
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rentang Gaji" android:textStyle="bold" android:textColor="#2D3748" android:textSize="16sp"/>
-        <EditText
-            android:id="@+id/etSalary"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Contoh : Rp 3.000.000.-"
-            android:background="@android:drawable/editbox_background"
-            android:paddingHorizontal="12dp"
-            android:layout_marginBottom="24dp"/>
+        <EditText android:id="@+id/etSalary" android:layout_width="match_parent" android:layout_height="50dp" android:hint="Contoh : Rp 3.000.000.-" android:background="@android:drawable/editbox_background" android:paddingHorizontal="12dp" android:layout_marginBottom="24dp"/>
 
         <Button
             android:id="@+id/btnSaveJob"

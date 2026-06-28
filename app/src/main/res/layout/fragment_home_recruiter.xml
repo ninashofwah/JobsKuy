@@ -32,13 +32,15 @@
                     android:layout_centerVertical="true"/>
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/ivProfileRecruiter"
+                    android:id="@+id/btnNavToRecruiterProfile"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@android:drawable/sym_def_app_icon"
                     app:shapeAppearanceOverlay="@style/CircleImage"
                     android:layout_alignParentEnd="true"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop"
+                    android:clickable="true"
+                    android:focusable="true"/>
             </RelativeLayout>
 
             <LinearLayout
@@ -82,7 +84,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btnCreateJobQuick"
+                android:id="@+id/btnCreateJobNow"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="20dp"
@@ -103,7 +105,7 @@
                 android:layout_marginBottom="12dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvReviewApplicants"
+                android:id="@+id/rvRecruiterJobList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"/>
